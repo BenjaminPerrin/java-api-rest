@@ -9,6 +9,7 @@ public class HelloWorld {
 
     @GET
     @Produces("text/plain")
+    //@Path("/world")
     public String getHelloWorld() {
         return "Hello World from text/plain";
     }
