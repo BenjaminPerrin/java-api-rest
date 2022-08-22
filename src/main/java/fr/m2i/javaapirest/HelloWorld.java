@@ -1,4 +1,4 @@
-package com.m2i.rest.lesson;
+package fr.m2i.javaapirest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
