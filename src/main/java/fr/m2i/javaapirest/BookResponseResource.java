@@ -30,10 +30,11 @@ import javax.ws.rs.core.UriInfo;
 @Path("/response-books")
 public class BookResponseResource {
 
+   
     // URI : /ok/without-response
     @GET
     @Path("/ok/without-response")
-    public String getBookWithoutResponse() {
+    public String getBookWithoutResonse() {
         System.out.println("Endpoint : getBookWithoutResponse");
         return "Java 8 doc";
     }
@@ -46,7 +47,6 @@ public class BookResponseResource {
         return Response.status(Response.Status.OK).entity("Java 8 doc").build();
     }
 
-    
     // URI : /ok/headers
     @GET
     @Path("/ok/headers")
@@ -54,8 +54,8 @@ public class BookResponseResource {
         System.out.println("Endpoint : getBookWithHeaders");
         return Response.status(Response.Status.OK).entity("Java 8 doc").header("param", "value").build();
     }
-    
-   // URI : /ok/json-produces
+
+    // URI : /ok/json-produces
     @GET
     @Path("/ok/json-produces")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +81,7 @@ public class BookResponseResource {
 
         return Response.status(Response.Status.OK).entity(book).type(MediaType.APPLICATION_JSON).build();
     }
-    
+
     // URI : /error/webapp-exception
     @GET
     @Path("/error/webapp-exception")
@@ -107,4 +107,5 @@ public class BookResponseResource {
 
         return Response.status(Response.Status.OK).entity("Livre avec id : " + id + " - Java 8 doc").build();
     }
+
 }
