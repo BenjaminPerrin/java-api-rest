@@ -29,7 +29,7 @@ public class AnnuaireDAO {
     public List<Personne> getPersonnes() {
         return personnes;
     }
-    
+
     public Personne getPersonneById(Long id) {
 
         for (Personne p : personnes) {
@@ -40,30 +40,22 @@ public class AnnuaireDAO {
 
         return null;
     }
-    
-    public void updatePersonne(Personne personne){
-        for (int i = 1; i < personnes.size(); i++) {
-            Personne tmp = personnes.get(i);
-            if (tmp.getId() == personne.getId()) {
-                int nb = personnes.indexOf(personnes.get(i));
-                System.out.println("Endpoint : updatePersonne "+personne.toString()+ " tmp.getId() "+nb);
-                personnes.set(Math.toIntExact(nb), personne);
-            }
+
+    public boolean update(Long id, Personne personne) {
+
+        Personne toUpdate = getPersonneById(id);
+
+        if (toUpdate == null) {
+            return false;
         }
+
+        personnes.remove(toUpdate);
+        personne.setId(id);
+        personnes.add(personne);
+
+        return true;
     }
     
-    public void deletePersonne(Personne personne){
-        for (int i = 0; i < personnes.size()-1; i++) {
-            Personne tmp = personnes.get(i);
-            if (tmp.getId() == personne.getId()) {
-                int nb = personnes.indexOf(personnes.get(i));
-                System.out.println("Endpoint : deletePersonne "+personne.toString() + "nb "+nb);
-                personnes.remove(Math.toIntExact(nb));
-            }
-        }
-    }
-    
-     
     public boolean delete(Long id) {
 
         Personne toDelete = getPersonneById(id);
