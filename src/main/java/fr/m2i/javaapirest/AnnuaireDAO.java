@@ -30,14 +30,14 @@ public class AnnuaireDAO {
         return personnes;
     }
     
-    public Personne getPersonneById(int id) {
-        for (int i = 0; i < personnes.size(); i++) {
-            Personne tmp = personnes.get(i);
-            if (tmp.getId() == id) {
-                System.out.println("Endpoint : getPersonneById "+tmp);
-                return tmp;
+    public Personne getPersonneById(Long id) {
+
+        for (Personne p : personnes) {
+            if (p.getId().equals(id)) {
+                return p;
             }
         }
+
         return null;
     }
     
@@ -61,5 +61,18 @@ public class AnnuaireDAO {
                 personnes.remove(Math.toIntExact(nb));
             }
         }
+    }
+    
+     
+    public boolean delete(Long id) {
+
+        Personne toDelete = getPersonneById(id);
+
+        if (toDelete == null) {
+            return false;
+        }
+
+        personnes.remove(toDelete);
+        return true;
     }
 }
