@@ -4,16 +4,28 @@
  */
 package fr.m2i.javaapirest.tpuser.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author ben
  */
+@XmlRootElement(name = "utilisateurs")
+@Entity
+@Table( name = "utilisateurs" )
 public class User {
     private int id;
     private String lastname;
     private String firstname;
     private String role;
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     public User() {
@@ -26,7 +38,9 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -74,6 +88,36 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", role=" + role + ", email=" + email + ", password=" + password + '}';
+    }
     
-    
+    public void copy(User userData) {
+
+        if (userData == null) {
+            return;
+        }
+
+        if (userData.getLastname() != null) {
+            this.lastname = userData.getLastname();
+        }
+
+        if (userData.getFirstname() != null) {
+            this.firstname = userData.getFirstname();
+        }
+
+        if (userData.getEmail() != null) {
+            this.email = userData.getEmail();
+        }
+
+        if (userData.getPassword() != null) {
+            this.password = userData.getPassword();
+        }
+
+        if (userData.getRole() != null) {
+            this.role = userData.getRole();
+        }
+    }
 }
